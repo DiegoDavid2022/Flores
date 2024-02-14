@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topetita de San Valentin</title>
+<style>
+    body {
+        background-color: black;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .flor {
+        position: absolute;
+        bottom: 0;
+        display: none;
+        font-size: 50px; /* Tamaño de las flores */
+    }
+    .corazon {
+        position: absolute;
+        display: none;
+        font-size: 50px;
+        color: red;
+        opacity: 0;
+    }
+    #mensaje {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        font-size: 24px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div id="mensaje">
+    <p id="te-amo">💖TE AMO MUCHO MI ESPOSITA😋💗</p>
+    <p id="san-valentin">❤️FELIZ SAN VALENTIN MI TIELITO❤️</p>
+</div>
+
+<script>
+    var contador = 0;
+
+    function crearFlores(event) {
+        var colores = ["#ff0000", "#00ff00", "#0000ff", "#ffff00"]; // Colores de las flores
+        var tipos = ["🌸", "🌼", "🌺", "💐"]; // Tipos de flores
+
+        for (var i = 0; i < 500; i++) { // Crear 500 flores con cada clic
+            var x = Math.random() * window.innerWidth;
+            var y = window.innerHeight;
+
+            var flor = document.createElement("div");
+            flor.className = "flor";
+            flor.innerHTML = tipos[Math.floor(Math.random() * tipos.length)];
+            flor.style.color = colores[Math.floor(Math.random() * colores.length)];
+            flor.style.left = x + "px";
+            flor.style.top = y + "px";
+            flor.style.display = "block"; // Establecer la visibilidad de la flor
+            document.body.appendChild(flor);
+
+            setTimeout(function() {
+                flor.style.transition = "top 5s linear, opacity 5s linear";
+                flor.style.top = "-100px";
+                flor.style.opacity = "0";
+                setTimeout(function() {
+                    flor.remove(); // Eliminar la flor después de la animación
+                }, 5000);
+            }, 10);
+        }
+
+        contador++;
+
+        if (contador >= 20) {
+            var mensaje = document.getElementById("mensaje");
+            mensaje.style.display = "block";
+            mensaje.style.animation = "fadeIn 2s forwards";
+
+            var corazones = document.querySelectorAll(".corazon");
+            for (var j = 0; j < corazones.length; j++) {
+                corazones[j].style.display = "inline";
+            }
+
+            var teAmo = document.getElementById("te-amo");
+            teAmo.style.animation = "float 3s infinite";
+
+            var sanValentin = document.getElementById("san-valentin");
+            sanValentin.style.animation = "float 3s infinite";
+        }
+    }
+
+    document.addEventListener("click", crearFlores);
+</script>
+
+</body>
+</html>
+
